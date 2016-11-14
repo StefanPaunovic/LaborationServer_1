@@ -2,7 +2,9 @@
  * Created by barhiw on 2016-11-10.
  */
 
-import java.util.ArrayList; import java.util.Collection; import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 public class UserHandler {
 

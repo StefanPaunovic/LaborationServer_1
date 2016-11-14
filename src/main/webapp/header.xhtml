@@ -1,0 +1,83 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+    <title>Header</title>
+</h:head>
+<h:body>
+    <h2>header</h2>
+    <ui:composition>
+
+    <h:form>   
+
+        <p:growl id="messages"/>
+
+        <p:menubar>
+
+
+            <p:menuitem value="Profile" url="login.xhtml" style="margin-right:50px"
+            />
+
+
+            <p:menuitem value="Create Account"  url="newUser.xhtml" style="margin-right:50px"
+            />
+
+            <p:menuitem value="Messages" url="messages.xhtml" style="margin-right:50px"
+            />
+
+
+
+            <f:facet name="options">
+                <p:inputText style="margin-right:10px" placeholder="Search" />
+                <h:form>
+                <h:outputLink value="javascript:void(0)"  onclick="PF('dlg').show();" title="login">
+
+                <p:commandButton type="button"  url="index.xhtml" value="Login"  icon="ui-icon-extlink" />
+                    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                </h:outputLink>
+
+                <p:dialog header="Login" widgetVar="dlg" resizable="false">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="username" value="Username:" />
+                        <p:inputText id="username" value="#{userLoginView.username}" required="true" label="username" />
+
+                        <h:outputLabel for="password" value="Password:" />
+                        <p:password id="password" value="#{userLoginView.password}" required="true" label="password" />
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Login" update="growl" actionListener="#{userLoginView.login}"
+                                             oncomplete="handleLoginRequest(xhr, status, args)" />
+
+
+                        </f:facet>
+                    </h:panelGrid>
+                </p:dialog>
+                </h:form>
+                <script type="text/javascript">
+                    function handleLoginRequest(xhr, status, args) {
+                        if(args.validationFailed || !args.loggedIn) {
+                            PF('dlg').jq.effect("shake", {times:5}, 100);
+                        }
+                        else {
+                            PF('dlg').hide();
+                            $('#loginLink').fadeOut();
+                        }
+                    }
+                </script>
+
+            </f:facet>
+
+        </p:menubar>
+
+    </h:form>
+
+    </ui:composition>
+
+</h:body>
+
+</html>
